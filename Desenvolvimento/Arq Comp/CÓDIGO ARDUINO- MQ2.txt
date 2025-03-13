@@ -1,27 +1,32 @@
-const int PINO_SENSOR_MQ2 = A0; // DECLARAÇÃO DA VARIÁVEL QUE ACESSA O PINO 
-const int VALOR_MINIMO = 100; // DECLARAÇÃO DA VARIÁVEL QUE GUARDA O VALOR MÍNIMO
-const int VALOR_MAXIMO = 1000;// DECLARAÇÃO DA VARIÁVEL QUE GUARDA O VALOR MÁXIMO
+const int PINO_SENSOR_MQ2 = A0;  // DECLARAÇÃO DA VARIÁVEL QUE ACESSA O PINO
+const int VALOR_MINIMO = 300;    // DECLARAÇÃO DA VARIÁVEL QUE GUARDA O VALOR MÍNIMO
+const int VALOR_MAXIMO = 10000;  // DECLARAÇÃO DA VARIÁVEL QUE GUARDA O VALOR MÁXIMO
+//  int linhaFixa = 15;
 
-void setup() { // AQUI NESSE BLOCO ELE CONFIGURA O ARDUINO PARA 9600 BITS POR SEGUNDO
+void setup() {  // AQUI NESSE BLOCO ELE CONFIGURA O ARDUINO PARA 9600 BITS POR SEGUNDO
   Serial.begin(9600);
 }
- void loop() {
- int valorSensor = analogRead(PINO_SENSOR_MQ2); // NESSE BLOCO INICIA OS CÁLCULOS PARA CAPTURA DA DENSIDADE DE GÁS E FAZ EM UMA REPETIÇÃO
+void loop() {
+  int valorSensor = analogRead(PINO_SENSOR_MQ2);  // NESSE BLOCO INICIA OS CÁLCULOS PARA CAPTURA DA DENSIDADE DE GÁS E FAZ EM UMA REPETIÇÃO
+  int linhaFixa = 15;
 
-float porcentagem = ((float) (valorSensor - VALOR_MINIMO) / (VALOR_MAXIMO - VALOR_MINIMO)) * 100;
+  float porcentagem = ((float)(valorSensor - VALOR_MINIMO) / (VALOR_MAXIMO - VALOR_MINIMO)) * 100;
 
-if (porcentagem < 0) {
-porcentagem = 0;
+  if (porcentagem < 0) {
+    porcentagem = 0;
 
-} else if
- (porcentagem > 100) {
-	porcentagem = 100;
-}
-Serial.print("Valor de Saída do Sensor: ");// AQUI SÃO INSERIDOS OS VALORES QUE APARECERÃO NO MONITOR SERIAL
-Serial.print(valorSensor);
-Serial.print(" -> Porcentagem: ");
-Serial.print(porcentagem);
-Serial.println("%");
+  } else if (porcentagem > 100) {
+    porcentagem = 100;
+  }
+  // Serial.print("Valor de Saída do Sensor: ");// AQUI SÃO INSERIDOS OS VALORES QUE APARECERÃO NO MONITOR SERIAL
+  Serial.print("valorSensor:"); 
+  Serial.print(valorSensor);
+  Serial.print(";");
+  Serial.println("Porcentagem:");
+  Serial.println(porcentagem);
+  // Serial.println(";");
+  Serial.println(linhaFixa);
+ 
 
-delay(4000);
+  delay(3000);
 }
