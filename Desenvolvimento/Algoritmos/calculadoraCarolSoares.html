@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador Financeiro</title>
+</head>
+<body>
+    <h2>Simulação Financeira para Condomínios</h2>
+    Informe o nome do condomínio:
+    <input id="input_nome" type="text">
+    <br><br>
+    Informe quantos apartamentos em um prédio:
+    <input id="input_aps" type="number">
+    <br><br>
+    Qual o valor estimado de um apartamento em reais:
+    <input id="input_imovel" type="number">
+    <br><br>
+    Possui seguro contra incêndio?
+    <br>
+    (Digite: sim ou não)
+    <input id="input_seguro" type="text">
+    <br><br>
+    <button onclick="calcular()">Calcular Riscos e Economia</button>
+    <div id="div_mensagem"></div>
+</body>
+</html>
+<script>
+    function calcular() {
+        var nome = input_nome.value;
+        var qtdAps = Number(input_aps.value);
+        var valorImovel = Number(input_imovel.value);
+        var seguro = input_seguro.value;
+        var valorPerdaEstimada = 0;
+
+
+        if (seguro === "sim") {
+            valorPerdaEstimada = (valorImovel * qtdAps) - (50000 * qtdAps);
+            //50.000 reais é a cobertura máxima dos planos de seguro incendio (plano básico)
+        } else {
+            valorPerdaEstimada = valorImovel * qtdAps;
+        }
+        
+        var vidas = qtdAps * 2; // Supondo que cada apartamento more em média duas pessoas
+
+        div_mensagem.innerHTML  = `
+            <p>Olá Condomínio <b>${nome}</b>,</p>
+            <p>Em caso de incêndio, o prejuízo estimado é em torno de <b>R$${valorPerdaEstimada}</b>.</p>
+            <p>Além disso, cerca de <b>${vidas}</b> vidas poderiam ser impactadas com o incêndio.</p>
+        `;
+    }
+</script>
