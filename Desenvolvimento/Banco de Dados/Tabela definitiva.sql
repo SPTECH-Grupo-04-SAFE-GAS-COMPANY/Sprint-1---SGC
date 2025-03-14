@@ -15,8 +15,8 @@ statusSensor VARCHAR(15)
 	CONSTRAINT ckSensor 
 		CHECK (statusSensor in ('Ativo', 'Inativo'))
 );
-create table condominio (
-idCondominio int primary key auto_increment,
+CREATE TABLE condominio (
+idCondominio INT PRIMARY KEY AUTO_INCREMENT,
 nome varchar(30) not null,
 logradouro varchar(50) not null,
 cep char(8) not null,
@@ -28,14 +28,14 @@ senha char(8) not null
 
 
 CREATE TABLE medicao (
-idMedicao int primary key auto_increment,
-dataHora datetime,
+idMedicao INT PRIMARY KEY AUTO_INCREMENT,
+dataHora DATETIME DEFAULT CURRENT_TIMESTAMP,
 concentracaoGases INT NOT NULL,
 	CONSTRAINT ckTaxa 
-		CHECK (concentracaoGases in (5,10,20)), 
+		CHECK (concentracaoGases IN (5,10,20)), 
 statusAlerta VARCHAR(30)
 	CONSTRAINT ckstatus
-		CHECK (statusAlerta in ('Normal', 'Atenção', 'Crítico'))
+		CHECK (statusAlerta IN ('Normal', 'Atenção', 'Crítico'))
 );
 
 
