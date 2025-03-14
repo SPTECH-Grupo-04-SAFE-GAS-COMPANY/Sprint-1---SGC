@@ -46,13 +46,17 @@
         var qtdap = ap * andar
         var areaTotal = area * altura;
         var densidade = (concentracao * 58) / 24.45;
-        var massaGas = densidade * areaTotal / 1000; // Convertendo mg para g
-        var custoVazamento = (massaGas / 1000) * preco; // Convertendo g para kg
+        var massaGas = densidade * areaTotal / 1000; 
+        var custoVazamento = (massaGas / 1000) * preco;  
         
 
-        div_mensagem.innerHTML = ` <br> <b style="color: dimgrey;">Seu condominio possui um total de <b style="color: red;">${qtdap} apartamentos</b> . <br>
-                                   <b style="color: dimgrey;"> Cada apartamento tendo uma area total de <b style="color: red;">${areaTotal} m</b> . <br>
-                                    <b style="color: dimgrey;">E com uma densidade: <b style="color: red;">${densidade.toFixed(2)}mg/m³</b> .<br>
+        div_mensagem.innerHTML = ` <br> <b style="color: dimgrey;">
+        Seu condominio possui <b style="color: red;">${ap} apartamentos e ${andar} andares</b>, tendo um total de <b style="color: red;">${qtdap} apartamentos por andares
+        </b> . <br>
+        <b style="color: dimgrey;">
+            Cada apartamento, tem uma  <b style="color: red;"> área de  ${area} m² e de altura ${altura} m</b>, com total de 
+            <b style="color: red;">${areaTotal} m</b> . <br>
+            <b style="color: dimgrey;">E com uma densidade: <b style="color: red;">${densidade.toFixed(2)} mg/m³</b> .<br>
                                     <b style="color: dimgrey;"> Massa total: <b style="color: red;">${massaGas.toFixed(2)} g.</b> <br>
                                     <b style="color: dimgrey;"> Custo estimado do vazamento:  <b style="color: red;">R$ ${areaTotal * qtdap *custoVazamento.toFixed(2) }.</b> `;
     }
