@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Vazamento de Gás</title>
+
+</head>
+
+<body>
+
+    <h2><span style="color: brown;">Calculadora de Vazamento de Gás Natural</span></h2>
+    <h4>Área do ambiente (m²):
+        <input type="number" id="input_area">
+    </h4>
+
+    <h4>Altura do ambiente (m):
+        <input type="number" id="input_altura">
+    </h4>
+
+    <h4>Concentração de gás (ppm):
+        <input type="number" id="input_ppm">
+    </h4>
+
+    <h4>Quantos apartamentos?
+        <input type="number" id="input_ap">
+    </h4>
+
+    <h4>Preço do gás (R$ por kg):
+        <input type="number" id="input_preco">
+    </h4>
+
+    <button onclick="calcularVazamento()">Calcular</button>
+
+    <div id="div_mensagem"></div>
+
+    <script>
+        function calcularVazamento() {
+            var area = Number(input_area.value);
+            var altura = Number(input_altura.value);
+            var ppm = Number(input_ppm.value);
+            var preco = Number(input_preco.value);
+            var ap = Number(input_ap.value);
+
+            var volume = area * altura;
+            var densidade = (ppm * 58) / 24.45; // 58 é a massa/mol do gás natural -- 24,45 = volume molar dos gases em CNTP (Condições Normais de Temperatura e Pressão) (L/mol)    
+            var massaGas = densidade * volume / 1000; // Convertendo mg para g -- 
+            var custoVazamento = (massaGas / 1000) * preco; // Convertendo g para kg
+
+
+
+            div_mensagem.innerHTML = `Densidade: ${densidade.toFixed(2)} mg/m³
+            \n <br> Massa total: ${massaGas.toFixed(2)} g\n <br> Custo estimado do vazamento: R$ ${ap * custoVazamento.toFixed(2)}`;
+        } // com a densidade e a massa do gás, podemos medir como ele está na atmosfera e o quanto é nocivo
+    </script>
+</body>
+
+</html>
