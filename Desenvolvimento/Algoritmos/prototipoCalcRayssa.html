@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body>
+<body style="background-color: #DAF7A6;">
 
     <h1>Safe Gas Company</h1>
     
@@ -41,7 +41,7 @@
     <input type="text" id="input_gas">
     <br><br>
 
-    <button onclick="calcular()"><b style="color: blue;">Calcular</b></button>
+    <button onclick="calcular()"><b style="color: #012e04;">Calcular</b></button>
 
     <br><br>
 
@@ -60,6 +60,7 @@
         var comodos = (input_comodo.value);
         var metros = Number (input_metros.value);
         var gas = Number (input_gas.value);
+
         var totalm = aptos * metros;
         var tudo = totalm * gas;
         var quantidade = metros * gas;
@@ -69,13 +70,17 @@
         if (aptos == 1){
         
         mensagem.innerHTML = `Senhor(a) ${cliente}, caso vaze gás natural no(a) cômodo ${comodos}, 
-        haverá um prejuízo de R$${quantidade} e se houver vazamento de ${porcentagem}kg (25%), há risco à vida do condômino e grandes chances de explosão.`
+        haverá um prejuízo de R$${quantidade}* e se houver vazamento de ${porcentagem}L (25%)***, há risco à vida do condômino e grandes chances de explosão. <br> <br>
+        * Metragem do cômodo multiplicada pelo valor do gás.<p>
+        ** Valor nocivo ao ser humano<p>`
         }
 
         if (aptos > 1){
 
-        mensagem.innerHTML = `Senhor(a) ${cliente}, caso vaze gás natural em ${aptos} apartamentos, haverá um prejuízo de R$${tudo}
-        e se a quantidade de gás ultrapassar 25% ( ${porcentagem}), a vida dos condôminos estará em risco, podendo causar alucinações e explosões. `    
+        mensagem.innerHTML = `Senhor(a) ${cliente}, caso vaze gás natural em ${aptos} apartamentos, haverá um prejuízo de R$${tudo}*
+        e se a quantidade de gás ultrapassar 25% ( ${porcentagem})**, a vida dos condôminos estará em risco, podendo causar alucinações e explosões.<br><br>
+        * Total de apartamentos multiplicado pela metragem dos cômodos informados multiplicado pelo valor do gás por metro quadrado.<p>
+        ** O total de gás contido no tanque utilizado multiplicado por 0.25 (25%).<p> `    
         }
 
         
