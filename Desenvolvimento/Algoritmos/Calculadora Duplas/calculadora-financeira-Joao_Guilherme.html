@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Financeira</title>
+</head>
+<body style="background-color:rgb(255, 255, 255)">
+<h1 style="color: darkslategray;" >Safe Gas Company</h1>
+    <h2 style="color:darkslategrey;">Calculadora Financeira <br>
+        Vazamento de Gás</h2>
+
+    Quantos apartamentos por andar? 
+    <input type="number" id="input_ap" style="background-color:rgb(228, 237, 228)" placeholder="Ex: 5 por andar"><br><br>
+
+    Quantos andares? 
+    <input type="number" id="input_andar" style="background-color:rgb(228, 237, 228)" placeholder="Ex: 10 andares" ><br><br>
+
+    Quantos metros possui(m²):
+    <input type="number" id="input_area" style="background-color:rgb(228, 237, 228)" placeholder="Ex: 50m²"> <br><br>
+
+    Preço do gás por apartamento:
+    <input type="number" id="input_preco" style="background-color:rgb(228, 237, 228)" placeholder="Ex: R$ 80,00"> <br><br>
+
+
+    Concentração de gás (ppm):
+    <input type="text" id="input_concentracao"style="background-color:rgb(228, 237, 228)" placeholder="Ex: 15 ppm"><br><br>
+    <button onclick="calcularVazamento()" style="background-color: darkslategray; color: white;" >Calcular</button>
+    <div id="div_mensagem"></div> 
+        <div style="color: aqua;"></div>
+</body>
+
+<script>
+    function calcularVazamento() {
+     
+    var ap = Number(input_ap.value);
+    var andar = Number(input_andar.value);
+    var area = Number(input_area.value);
+    var preco = Number(input_preco.value);
+    var concentracao = Number(input_concentracao.value); 
+        
+        var qtdap = ap * andar
+        var densidade = (concentracao * 58) / 24.45;
+        var massaGas = densidade * area / 1000; 
+        var custoVazamento = (massaGas / 1000) * preco;  
+        
+
+        div_mensagem.innerHTML = ` <br> <b style="color: dimgrey;">
+        Seu condominio possui um total de <b style="color: blue;">${qtdap} apartamentos por andar. </b>Sendo que possui <b style="color: blue;">${ap} apartamentos e ${andar} andares.
+        </b> . <br><br>
+
+        <b style="color: dimgrey;"> Cada apartamento, tem uma  <b style = "color: blue"> área total de  ${area} m²<b style="color: blue;"> </b> . <br><br>
+
+            <b style="color: dimgrey;">E com uma densidade: <b style="color: blue;">${densidade.toFixed(2)} mg/m³</b>. A densidade encontramos a partir que calculamos o <b style="color: blue;"> ppm multiplicando pela massa/mol do gás natural que é 58 e dividindo pelo volume molar dos gases em CNTP padrão 24,45.</b><br><br>
+            
+                                    <b style="color: dimgrey;"> Massa total: <b style="color: blue;">${massaGas.toFixed(2)} g.</b> A massa encontramos  <b style="color: blue;"> a partir da densidade multiplicando pelo volume e dividindo por mil </b> para fazer a conversão de mg para g.</b> <br><br>
+
+                                    <b style="color: dimgrey;"> Custo estimado do vazamento:  <b style="color: blue;">R$ ${(area * qtdap *custoVazamento).toFixed(2) }.</b> Que foi baseado na massa do gás <b style="color: blue;">sendo dividida por mil para fazer a conversão de g para kg e ao final multiplicando pelo preço.</b>;
+
+                                    <br> <br> <u> Obs: Com a densidade e a massa do gás, podemos medir como ele está na atmosfera e o quanto é nocivo.</u>`
+
+    }
+</script>
