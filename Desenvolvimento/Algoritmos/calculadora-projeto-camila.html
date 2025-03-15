@@ -9,30 +9,61 @@
 
 <body>
     <h2>Calculadora Financeira de Vazamento de Gás</h2>
-    Apartamentos afetados: <input id='input_aptsAfetados' type='number'>
-    <br>
-    Custo de reparos (R$): <input id='input_custoReparos' type='number'>
-    <br>
-    Custo com indenizações (R$): <input id='input_custoIndenizacoes'>
-    <br>
-    Custo de manutenção preventiva (R$): <input id='input_custoManutencaoPreventiva'>
-    <br>
-    Custo para refazer tubos (R$): <input id='input_custoRefazerTubos' type='number'>
-    <br>
-    <button onclick='calcularPrejuizo()'>Calcular</button>
-    <h3 id='resultado'></h3>
+    Informe o nome do edifício: <input id="input_nome" type="text">
+    <br><br>
+    Apartamentos por andar afetados: <input id="input_aptsAfetados" type="number">
+    <br><br>
+    Quantidade de andares afetados: <input id="input_qtdAndares" type="number">
+    <br><br>
+    Nível de vazamento de gás (normal, atenção ou crítico): <input id="input_nivelGas" type="text">
+    <br><br>
+
+    <button onclick="calcularPrejuizo()">Calcular</button>
+    <div id="resultado"></div>
 
     <script>
         function calcularPrejuizo() {
-            var aptsAfetados = Number(input_aptsAfetados.value)
-            var custoReparos = Number(input_custoReparos.value)
-            var custoIndenizacoes = Number(input_custoIndenizacoes.value)
-            var custoManutencaoPreventiva = Number(input_custoManutencaoPreventiva.value)
-            var custoRefazerTubos = Number(input_custoRefazerTubos.value)
+            var nome = input_nome.value;
+            var aptsAfetados = Number(input_aptsAfetados.value);
+            var qtdAndares = Number(input_qtdAndares.value);
+            var nivelGas = input_nivelGas.value;
 
-            var prejuizoTotal = (aptsAfetados * 1000) + custoReparos + custoIndenizacoes + custoManutencaoPreventiva + custoRefazerTubos;
+            var prejuizo = (aptsAfetados * 1000) * qtdAndares;
+            
+            var manutencao = 0;
+            if (nivelGas === "atenção") {
+                manutencao = 5000;
+            } else if (nivelGas === "crítico") {
+                manutencao = 10000;
+            }
 
-            resultado.innerHTML = `Prejuízo estimado: R$ ${prejuizoTotal.toFixed(2)}`;
+            var total = prejuizo + manutencao;
+
+            var percentualManutencao = 0;
+            if (total > 0) {
+                percentualManutencao = (manutencao / total) * 100;
+            }
+
+            var mensagemManutencao = "Manutenção coberta: ";
+            if (manutencao === 0) {
+                mensagemManutencao += "R$0,00 (sem custos adicionais para esse nível)";
+            } else {
+                mensagemManutencao += `R$${manutencao} (nível ${nivelGas})`;
+            }
+
+            resultado.innerHTML = `
+                <h3 style="color: #7CB063;">Relatório financeiro</h3>
+                <p>Nome do condomínio: ${nome}</p>
+                <p>Nível do vazamento: ${nivelGas}</p>
+                <p>Apartamentos afetados por andar: ${aptsAfetados}</p>
+                <p>Andares afetados: ${qtdAndares}</p>
+                <br>
+                <h3 style="color: #7CB063;">Detalhamento da conta:</h3>
+                <p>Prejuízo estimado: ${aptsAfetados} aptos x R$1.000,00 x ${qtdAndares} andares = R$${prejuizo}</p>
+                <p>${mensagemManutencao}</p>
+                <p>Total (Prejuízo + Manutenção): R$${total}</p>
+                <p>Percentual da manutenção sobre o total: ${percentualManutencao}%</p>
+            `
         }
     </script>
 </body>
