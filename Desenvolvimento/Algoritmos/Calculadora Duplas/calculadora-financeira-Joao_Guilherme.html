@@ -13,6 +13,9 @@
     Quantos apartamentos por andar? 
     <input type="number" id="input_ap" style="background-color:rgb(228, 237, 228)" placeholder="Ex: 5 por andar"><br><br>
 
+    Altura do ambiente (m):
+    <input type="number" id="input_altura"style="background-color:rgb(228, 237, 228)" placeholder="Ex: 3m"><br><br>
+
     Quantos andares? 
     <input type="number" id="input_andar" style="background-color:rgb(228, 237, 228)" placeholder="Ex: 10 andares" ><br><br>
 
@@ -35,19 +38,21 @@
      
     var ap = Number(input_ap.value);
     var andar = Number(input_andar.value);
+    var altura = Number(input_altura.value);
     var area = Number(input_area.value);
     var preco = Number(input_preco.value);
     var concentracao = Number(input_concentracao.value); 
         
         var qtdap = ap * andar
+        var volume = area * altura;
         var densidade = (concentracao * 58) / 24.45;
-        var massaGas = densidade * area / 1000; 
+        var massaGas = densidade * volume / 1000; 
         var custoVazamento = (massaGas / 1000) * preco;  
         
 
         div_mensagem.innerHTML = ` <br> <b style="color: dimgrey;">
         Seu condominio possui um total de <b style="color: blue;">${qtdap} apartamentos por andar. </b>Sendo que possui <b style="color: blue;">${ap} apartamentos e ${andar} andares.
-        </b> . <br><br>
+        </b> <br><br>
 
         <b style="color: dimgrey;"> Cada apartamento, tem uma  <b style = "color: blue"> área total de  ${area} m²<b style="color: blue;"> </b> . <br><br>
 
@@ -55,7 +60,7 @@
             
                                     <b style="color: dimgrey;"> Massa total: <b style="color: blue;">${massaGas.toFixed(2)} g.</b> A massa encontramos  <b style="color: blue;"> a partir da densidade multiplicando pelo volume e dividindo por mil </b> para fazer a conversão de mg para g.</b> <br><br>
 
-                                    <b style="color: dimgrey;"> Custo estimado do vazamento:  <b style="color: blue;">R$ ${(area * qtdap *custoVazamento).toFixed(2) }.</b> Que foi baseado na massa do gás <b style="color: blue;">sendo dividida por mil para fazer a conversão de g para kg e ao final multiplicando pelo preço.</b>;
+                                    <b style="color: dimgrey;"> Custo estimado do vazamento:  <b style="color: blue;">R$ ${(area * qtdap *custoVazamento).toFixed(2) }.</b> Que foi baseado na massa do gás <b style="color: blue;">sendo dividida por mil para fazer a conversão de g para kg e ao final multiplicando pelo preço.</b>
 
                                     <br> <br> <u> Obs: Com a densidade e a massa do gás, podemos medir como ele está na atmosfera e o quanto é nocivo.</u>`
 
