@@ -35,18 +35,31 @@
 
 
         if (seguro === "sim") {
-            valorPerdaEstimada = (valorImovel * qtdAps) - (50000 * qtdAps);
-            //50.000 reais é a cobertura máxima dos planos de seguro incendio (plano básico)
+            valorPerdaEstimada = (valorImovel * qtdAps) - (40000 * qtdAps);
+            div_mensagem.innerHTML  = `<p>Olá Condomínio <b>${nome}</b>,</p>
+                <p>Considerando que seu prédio possui <b>${qtdAps}</b> apartamentos e que cada unidade tem um valor estimado de <b>R$${valorImovel}</b>, o valor total dos imóveis em um prédio é de <b>R$${valorImovel * qtdAps}</b>.</p>
+                <p>Como vocês possuem seguro contra incêndio e a cobertura média dos planos básicos é de <b>R$40.000</b> por apartamento, a seguradora cobriria um total de <b>R$${40000 * qtdAps}</b>.</p>
+                <p>Dessa forma, estimamos que, em caso de incêndio, a perda financeira para o condomínio seria de aproximadamente <b>R$${valorPerdaEstimada}</b>.</p>
+            `;
+
+
+            //40.000 reais é a média da cobertura dos planos de seguro incendio (plano básico)
+            //https://pagbank.com.br/conta-digital/seguros-e-saude/seguro-residencia?utm_source=chatgpt.com
+            //https://www.bv.com.br/seguro/seguro-residencial
         } else {
             valorPerdaEstimada = valorImovel * qtdAps;
+            div_mensagem.innerHTML  = `
+                <p>Olá Condomínio <b>${nome}</b>,</p>
+                <p>Como seu prédio possui <b>${qtdAps}</b> apartamentos e cada unidade tem um valor estimado de <b>R$${valorImovel}</b>, o valor total dos imóveis é de <b>R$${valorImovel * qtdAps}</b>.</p>
+                <p>Sem um seguro contra incêndio, esse seria o prejuízo total estimado em caso de incêndio <b>R$${valorPerdaEstimada}</b>.</p>
+            `;
         }
         
         var vidas = qtdAps * 2; // Supondo que cada apartamento more em média duas pessoas
 
-        div_mensagem.innerHTML  = `
-            <p>Olá Condomínio <b>${nome}</b>,</p>
-            <p>Em caso de incêndio, o prejuízo estimado é em torno de <b>R$${valorPerdaEstimada}</b>.</p>
-            <p>Além disso, cerca de <b>${vidas}</b> vidas poderiam ser impactadas com o incêndio.</p>
+        div_mensagem.innerHTML  += ` 
+            <p>Além disso, considerando que cada apartamento morem duas pessoas, cerca de <b>${vidas}</b> vidas poderiam ser impactadas com o incêndio.</p>
+            <b><p style = "color:green">Com a solução da Safe Gas Company para o seu condomínio, ajudamos você a economizar e a proteger vidas..</p></b>
         `;
     }
 </script>
