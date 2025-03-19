@@ -34,7 +34,7 @@
         var valorPerdaEstimada = 0;
 
 
-        if (seguro === "sim") {
+        if (seguro == "sim") {
             valorPerdaEstimada = (valorImovel * qtdAps) - (40000 * qtdAps);
             div_mensagem.innerHTML  = `<p>Olá Condomínio <b>${nome}</b>,</p>
                 <p>Considerando que seu prédio possui <b>${qtdAps}</b> apartamentos e que cada unidade tem um valor estimado de <b>R$${valorImovel}</b>, o valor total dos imóveis em um prédio é de <b>R$${valorImovel * qtdAps}</b>.</p>
