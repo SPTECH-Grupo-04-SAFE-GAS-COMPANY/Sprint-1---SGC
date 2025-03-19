@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -39,14 +39,19 @@
     <input id="input_imovel" type="number" style="background-color:rgb(227, 194, 194)">
     <br><br>
 
-    Houve vazamento de gás <br><br>
-    (Digite: sim ou não)?
-    <input type="text" id="input_vazamento"  style="background-color:rgb(227, 194, 194)" placeholder="Ex: Sim">
-    <br><br>
-
-    Possui seguro contra incêndio?</b><br>
-    (Digite: sim ou não)
-    <input id="input_seguro" type="text" style="background-color:rgb(227, 194, 194)">
+    Houve vazamento de gás <br> <select style="background-color:rgb(227, 194, 194)" id="select_vazamento">
+        <option value="Sim">Sim</option>
+        <option value="Nâo">Não</option>
+    </select> <br>
+    
+   
+Possui seguro contra incêndio?</b><br>
+    <select style="background-color:rgb(227, 194, 194)" id="select_seguro">
+        <option value="Sim">Sim</option>
+        <option value="Nâo">Não</option>
+    </select>
+    
+    
     <br><br>
 
     <button onclick="calcularVazamento()"style="background-color: rgb(32, 140, 86); color: white;">Calcular</button>
@@ -70,8 +75,8 @@
         var andares = Number(input_andares.value);
         var altura = Number(input_altura.value);
         var metros = Number(input_metros.value);
-        var vazamento = input_vazamento.value;
-        var seguro = input_seguro.value;
+        var vazamento = select_vazamento.value;
+        var seguro = select_seguro.value;
         var valorImovel = Number(input_imovel.value);
 
         //Em seguida damos continuidade realizando cálculos referentes ao modelo do negócio, a quantidade de aptos e o valor da perda estimada.
