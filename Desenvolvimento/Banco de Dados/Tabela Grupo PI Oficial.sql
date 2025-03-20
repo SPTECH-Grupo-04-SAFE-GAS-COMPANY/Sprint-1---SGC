@@ -11,7 +11,7 @@ CREATE TABLE sensor (
 idSensor INT PRIMARY KEY auto_increment,
 nome VARCHAR(25) NOT NULL,
 tipo VARCHAR(30) NOT NULL,
-statusSensor VARCHAR(15) 
+statusSensor VARCHAR(15),
 	CONSTRAINT ckSensor 
 		CHECK (statusSensor IN ('Ativo', 'Inativo'))
 );
@@ -33,7 +33,7 @@ dataHora DATETIME DEFAULT CURRENT_TIMESTAMP,
 concentracaoGases INT NOT NULL,
 	CONSTRAINT ckTaxa 
 		CHECK (concentracaoGases IN (5,10,20)), 
-statusAlerta VARCHAR(30)
+statusAlerta VARCHAR(30),
 	CONSTRAINT ckStatus
 		CHECK (statusAlerta IN ('Normal', 'Atenção', 'Crítico'))
 );

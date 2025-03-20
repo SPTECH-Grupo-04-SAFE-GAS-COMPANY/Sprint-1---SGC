@@ -22,7 +22,7 @@ senha char(8) not null
 create table sensor (
 idSensor int primary key auto_increment,
 nome varchar(25) not null,
-statusSensor varchar(30)
+statusSensor varchar(30),
 constraint chkStatus check (statusSensor in ('Ativo', 'Inativo')),
 tipo varchar(30) not null
 );
@@ -33,7 +33,7 @@ dataHora datetime default current_timestamp,
 concentracaoGases int not null,
 	constraint ckTaxa 
 		check (concentracaoGases in (5,10,20)), 
-statusAlerta varchar(30)
+statusAlerta varchar(30),
 	constraint ckstatus
 		check (statusAlerta in ('Normal', 'Atenção', 'Crítico'))
 );
@@ -51,8 +51,17 @@ INSERT INTO medicao (idMedicao, concentracaoGases, statusAlerta) VALUES
 (DEFAULT, 5, 'Normal'),
 (DEFAULT, 10, 'Atenção');
 
+
 select * from usuario;
+
+select * from condominio;
+
+SELECT * FROM condominio WHERE idCondominio = 2;
 
 select * from sensor;
 
-select * from condominio;
+SELECT * FROM sensor WHERE statusSensor LIKE 'Inativo';
+
+SELECT * FROM medicao;
+
+SELECT * FROM medicao WHERE concentracaoGases <= 10;
