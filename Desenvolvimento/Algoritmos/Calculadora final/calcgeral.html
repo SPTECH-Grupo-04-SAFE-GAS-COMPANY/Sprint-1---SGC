@@ -47,8 +47,8 @@
    
 Possui seguro contra incêndio?</b><br>
     <select style="background-color:rgb(227, 194, 194)" id="select_seguro">
-        <option value="Sim">Sim</option>
-        <option value="Nâo">Não</option>
+        <option>Sim</option>
+        <option>Não</option>
     </select>
     
     
@@ -92,22 +92,22 @@ Possui seguro contra incêndio?</b><br>
         - https://pagbank.com.br/conta-digital/seguros-e-saude/seguro-residencia?utm_source=chatgpt.com
         - https://www.bv.com.br/seguro/seguro-residencial (fontes)*/
 
-        if (seguro == 'sim') {
+        if (seguro == 'Sim') {
             valorPerdaEstimada = (valorImovel * totalApto) - (40000 * totalApto);
             mensagem.innerHTML += `<p>Olá Condomínio <b>${nome}</b>,</p>
-                    <p>Considerando que seu prédio possui <b>${totalApto}</b> apartamentos e que cada unidade tem um valor estimado de <b>R$${valorImovel}</b>, o valor total dos imóveis em um prédio é de <b>R$${valorImovel * totalApto}</b>.</p>
+                    <p>Considerando que seu prédio possui <b>${totalApto}</b> apartamentos e que cada unidade tem um valor estimado de <b style= "color: green">R$${valorImovel}</b>, o valor total dos imóveis em um prédio é de <b style= "color: green">R$${valorImovel * totalApto}</b>.</p>
                     <p>Como vocês possuem seguro contra incêndio e a cobertura média dos planos básicos é de <b>R$40.000</b> por apartamento, a seguradora cobriria um total de <b>R$${40000 * totalApto}</b>.</p>
-                    <p>Dessa forma, estimamos que, em caso de incêndio, a perda financeira para o condomínio seria de aproximadamente <b>R$${valorPerdaEstimada}</b>.</p>`;
+                    <p>Dessa forma, estimamos que, em caso de incêndio, a perda financeira para o condomínio seria de aproximadamente <b style= "color: red">R$${valorPerdaEstimada}</b>.</p>`;
         } else {
             valorPerdaEstimada = valorImovel * totalApto;
             mensagem.innerHTML += `
                     <p>Olá Condomínio <b>${nome}</b>,</p>
                     <p>Como seu prédio possui <b>${totalApto}</b> apartamentos e cada unidade tem um valor estimado de <b>R$${valorImovel}</b>, o valor total dos imóveis é de <b>R$${valorImovel * totalApto}</b>.</p>
-                    <p>Sem um seguro contra incêndio, esse seria o prejuízo total estimado em caso de incêndio <b>R$${valorPerdaEstimada}</b>.</p>`;
+                    <p>Sem um seguro contra incêndio, esse seria o prejuízo total estimado em caso de incêndio <b style= "color: red">R$${valorPerdaEstimada}</b>.</p>`;
         }
 
         // Calculamos o volume do ambiente multiplicando metro quadrado x altura e inserimos no calculo seguinte para descobrir o ppm padrão para a base dos cálculos de vazamento para mostrar categoria de riscos.
-
+ 
         var volumeAr = metros * altura;
         var volumeGas = 0.001;
         var ppm = ((volumeGas / volumeAr) * 1000000).toFixed(3);
@@ -117,34 +117,34 @@ Possui seguro contra incêndio?</b><br>
             mensagem.innerHTML += categoria + `<p><b>Categoria de riscos em ppm :</b> <br>
                     Seguro: ppm < 1.000 <br>
                     Atenção: 1.000 ≤ ppm < 18.000 (Limite Inferior de Explosividade - LIE) <br>
-                    Risco de Asfixia: 18.000 ≤ ppm < 50.000 (concentração de GLP desloca oxigênio) <br>
+                    Risco de Asfixia: 18.000 ≤ ppm < 50.000 (concentração de GN desloca oxigênio) <br>
                     Risco de Explosão: 50.000 ≤ ppm < 95.000 (Limite Superior de Explosividade - LSE) <br><br>
-                    Referências: https://www.vibraenergia.com.br/sites/default/files/2021-08/emergencia-g%C3%A1s-liquefeito-GLP.pdf<br>
-                    https://www.bombeiros.pr.gov.br/Pagina/Gas-de-cozinha-ou-GLP?utm_source=chatgpt.com <br>
+                    Referências: https://lelambiental.com.br/artigos-tecnicos/deteccao-de-gases/<br>
+                    <br>
                     https://www.gov.br/anp/pt-br
                     </p>`
         } else {
             // Verificamos se o ppm está na categoria segura  
             if (ppm < 1.000) {
-                categoria += "<b style= 'color: green;'>Seguro:</b> A concentração de GLP está em níveis seguros, sem risco imediato.<br>";
+                categoria += "<b style= 'color: green;'>Seguro:</b> A concentração de GN está em níveis seguros, sem risco imediato.<br>";
             } else {
-                categoria += '<b style= "color: orange;">Atenção:</b>A concentração de GLP está em níveis elevados, é necessário monitoramento constante.<br>';
+                categoria += '<b style= "color: orange;">Atenção:</b>A concentração de GN está em níveis elevados, é necessário monitoramento constante.<br>';
             }
             // Verificamos se há risco de asfixia ou não com base na quantidade de ppm de GLP no ambiente
             if (ppm >= 18.000) {
                 if (ppm < 50.000) {
-                    categoria += '<b style= "color: orange;">Risco de Asfixia:</b> A concentração de GLP é alta o suficiente para deslocar oxigênio no ar, o ambiente precisa de ventilação.<br>'
+                    categoria += '<b style= "color: orange;">Risco de Asfixia:</b> A concentração de GN é alta o suficiente para deslocar oxigênio no ar, o ambiente precisa de ventilação.<br>'
                 }
             } else {
-                categoria += '<b style= "color: green;">Sem risco de asfixia:</b> A concentração de GLP está abaixo dos níveis críticos para asfixia.<br>';
+                categoria += '<b style= "color: green;">Sem risco de asfixia:</b> A concentração de GN está abaixo dos níveis críticos para asfixia.<br>';
             }
             // Verificamos se há risco de explosão levando em conta o máximo de ppm de GLP que é de 9,5% no ambiente ou 95.000 ppm
             if (ppm >= 18.000) {
                 if (ppm < 95.000) {
-                    categoria += '<b style= "color: red;">Risco de Explosão:</b> A concentração de GLP está dentro da faixa explosiva. Evacuação imediata necessária!<br>';
+                    categoria += '<b style= "color: red;">Risco de Explosão:</b> A concentração de GN está dentro da faixa explosiva. Evacuação imediata necessária!<br>';
                 }
             } else {
-                categoria += '<b style= "color: green;">Sem risco de explosão:</b> A concentração de GLP está abaixo do limite inferior de explosividade (LIE).<br>';
+                categoria += '<b style= "color: green;">Sem risco de explosão:</b> A concentração de GN está abaixo do limite inferior de explosividade (LIE).<br>';
             }
 
             // Mostramos então as categorias de riscos e a categoria atual com base no tamanho do apartamento, volume e volume de gás que vazou, bem como as referências desses cálculos.
@@ -153,8 +153,7 @@ Possui seguro contra incêndio?</b><br>
                     Atenção: 1.000 ≤ ppm < 18.000 (Limite Inferior de Explosividade - LIE) <br>
                     Risco de Asfixia: 18.000 ≤ ppm < 50.000 (concentração de GLP desloca oxigênio) <br>
                     Risco de Explosão: 50.000 ≤ ppm < 95.000 (Limite Superior de Explosividade - LSE) <br><br>
-                    Referências: https://www.vibraenergia.com.br/sites/default/files/2021-08/emergencia-g%C3%A1s-liquefeito-GLP.pdf<br>
-                    https://www.bombeiros.pr.gov.br/Pagina/Gas-de-cozinha-ou-GLP?utm_source=chatgpt.com <br>
+                    Referências: https://lelambiental.com.br/artigos-tecnicos/deteccao-de-gases/ <br>
                     https://www.gov.br/anp/pt-br
                     </p>`
         }
