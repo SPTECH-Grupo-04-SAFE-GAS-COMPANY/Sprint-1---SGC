@@ -7,46 +7,46 @@
     <title>Calculadora SGC</title>
 </head>
 
-<body style="background-color: rgb(243, 234, 234);">
+<body style="background-color: rgb(247, 246, 246);">
 
     <h1 style="color: rgb(32, 140, 86);" >SGC Safe Gas Company</h1>
-    <h2 style="color: rgb(248, 132, 132);" >Simulador Financeiro <br> Vazamento de gás</h2>
+    <h2 style="color: rgb(32, 140, 86);" >Simulador Financeiro <br> Vazamento de gás</h2>
 
     Informe o nome do edifício:
-    <input type="text" id="input_nome" style="background-color:rgb(227, 194, 194)" placeholder="Ex: Quinta Do Sol">
+    <input type="text" id="input_nome" style="background-color:rgb(217, 245, 231)" placeholder="Ex: Quinta Do Sol">
     <br><br>
 
     Informe quantos apartamentos são por andar:
-    <input type="number" id="input_aptos"  style="background-color:rgb(227, 194, 194)"placeholder="Ex: 5">
+    <input type="number" id="input_aptos"  style="background-color:rgb(217, 245, 231)"placeholder="Ex: 5">
     <br><br>
     Informe a quantidade de andares:
-    <input type="number" id="input_andares" style="background-color:rgb(227, 194, 194)" placeholder="Ex: 10">
+    <input type="number" id="input_andares" style="background-color:rgb(217, 245, 231)" placeholder="Ex: 10">
     <br><br>
 
     <h2 style="color: rgb(32, 140, 86)">Cálculo de GN no ambiente</h2>
 
     Informe quantos metros cada apartamento possui(m²):
-    <input type="number" id="input_metros" style="background-color:rgb(227, 194, 194)" placeholder="Ex: 55">
+    <input type="number" id="input_metros" style="background-color:rgb(217, 245, 231)" placeholder="Ex: 55">
     <br><br>
 
     Informe a altura do apartamento(m):
-    <input type="text" id="input_altura" style="background-color:rgb(227, 194, 194)" placeholder="Ex: 2.5">
+    <input type="text" id="input_altura" style="background-color:rgb(217, 245, 231)" placeholder="Ex: 2.5">
     <br><br>
 
     <h2 style="color: rgb(32, 140, 86)">Cálculo de Perda Financeira</h2>
 
     Qual o valor estimado de um apartamento em reais:
-    <input id="input_imovel" type="number" style="background-color:rgb(227, 194, 194)">
+    <input id="input_imovel" type="number" style="background-color:rgb(217, 245, 231)">
     <br><br>
 
-    Houve vazamento de gás <br> <select style="background-color:rgb(227, 194, 194)" id="select_vazamento">
+    Houve vazamento de gás <br> <select style="background-color:rgb(217, 245, 231)" id="select_vazamento">
         <option value="Sim">Sim</option>
         <option value="Nâo">Não</option>
     </select> <br>
     
    
 Possui seguro contra incêndio?</b><br>
-    <select style="background-color:rgb(227, 194, 194)" id="select_seguro">
+    <select style="background-color:rgb(217, 245, 231)" id="select_seguro">
         <option>Sim</option>
         <option>Não</option>
     </select>
@@ -130,7 +130,7 @@ Possui seguro contra incêndio?</b><br>
             } else {
                 categoria += '<b style= "color: orange;">Atenção:</b>A concentração de GN está em níveis elevados, é necessário monitoramento constante.<br>';
             }
-            // Verificamos se há risco de asfixia ou não com base na quantidade de ppm de GLP no ambiente
+            // Verificamos se há risco de asfixia ou não com base na quantidade de ppm de GN no ambiente
             if (ppm >= 18.000) {
                 if (ppm < 50.000) {
                     categoria += '<b style= "color: orange;">Risco de Asfixia:</b> A concentração de GN é alta o suficiente para deslocar oxigênio no ar, o ambiente precisa de ventilação.<br>'
@@ -138,7 +138,7 @@ Possui seguro contra incêndio?</b><br>
             } else {
                 categoria += '<b style= "color: green;">Sem risco de asfixia:</b> A concentração de GN está abaixo dos níveis críticos para asfixia.<br>';
             }
-            // Verificamos se há risco de explosão levando em conta o máximo de ppm de GLP que é de 9,5% no ambiente ou 95.000 ppm
+            // Verificamos se há risco de explosão levando em conta o máximo de ppm de GN que é de 9,5% no ambiente ou 95.000 ppm
             if (ppm >= 18.000) {
                 if (ppm < 95.000) {
                     categoria += '<b style= "color: red;">Risco de Explosão:</b> A concentração de GN está dentro da faixa explosiva. Evacuação imediata necessária!<br>';
@@ -151,7 +151,7 @@ Possui seguro contra incêndio?</b><br>
             mensagem.innerHTML += categoria + `<p><b>Categoria de riscos em ppm :</b> <br>
                     Seguro: ppm < 1.000 <br>
                     Atenção: 1.000 ≤ ppm < 18.000 (Limite Inferior de Explosividade - LIE) <br>
-                    Risco de Asfixia: 18.000 ≤ ppm < 50.000 (concentração de GLP desloca oxigênio) <br>
+                    Risco de Asfixia: 18.000 ≤ ppm < 50.000 (concentração de GNP desloca oxigênio) <br>
                     Risco de Explosão: 50.000 ≤ ppm < 95.000 (Limite Superior de Explosividade - LSE) <br><br>
                     Referências: https://lelambiental.com.br/artigos-tecnicos/deteccao-de-gases/ <br>
                     https://www.gov.br/anp/pt-br
