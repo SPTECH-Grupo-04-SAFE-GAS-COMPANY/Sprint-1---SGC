@@ -18,8 +18,11 @@
     <br><br>
     Possui seguro contra incêndio?
     <br>
-    (Digite: sim ou não)
-    <input id="input_seguro" type="text">
+    <select id="select_seguro">
+        <option value="sim">Sim</option>
+        <option value="nao">Não</option>
+    </select>
+    
     <br><br>
     <button onclick="calcular()">Calcular Riscos e Economia</button>
     <div id="div_mensagem"></div>
@@ -30,7 +33,7 @@
         var nome = input_nome.value;
         var qtdAps = Number(input_aps.value);
         var valorImovel = Number(input_imovel.value);
-        var seguro = input_seguro.value;
+        var seguro = select_seguro.value;
         var valorPerdaEstimada = 0;
 
 

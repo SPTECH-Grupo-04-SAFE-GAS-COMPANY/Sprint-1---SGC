@@ -11,17 +11,14 @@
 
 <p>OBS: digite apenas números</p>
 
-<p>Custo de Instalação por edíficio (SGC):</p>
-<input id="inst" type="text">
+<p>Digite a quantidade de apartamentos por edifício:</p>
+<input id="apto" type="text">
 
-<p>Custo anual de manutenção dos sensores (SGC):</p>
-<input id="manutencao" type="text">
+<p>Insira a quantidade de edifícios do condomínio:</p>
+<input id="edif" type="text">
 
-<p>Custo médio de danos em caso de vazamento (1 apto):</p>
-<input id="danos" type="text">
-
-<p>Custo anterior de seguros (valor anual):</p>
-<input id="seguros" type="text">
+<p>Digite quantos m² têm os apartamentos (em média):</p>
+<input id="metros2" type="text">
 
 <br><br>
 
@@ -36,17 +33,36 @@
 
 <script>
     function vereconomia() {
-        var CustoInstalacao = Number (inst.value)
-        var CustoDanos = Number (danos.value)
-        var CustoSeguros = Number (seguros.value)
-        var CustoManutencao = Number (manutencao.value)
-        gastos = CustoSeguros + CustoDanos
-        custo = CustoInstalacao + CustoManutencao
-        economia = gastos - custo
-        mensagem.innerHTML = `<b style="color: red"> Os gastos sem a SGC seriam de: R$${gastos} </b><br><br>`
-        mensagem.innerHTML += `<b style="color: purple"> O custo por edifício com a SGC seria de: R$${custo} no 1º ano </b><br><br>`
-        mensagem.innerHTML += `<b style="color: blue"> O custo por edifício com a SGC seria de: R$${CustoManutencao} a partir do 2º ano </b><br><br>`
-        mensagem.innerHTML += `<b style="color: green"> A economia média com a SGC seria de: R$${economia} `
+        var QuantApto = Number (apto.value)
+        var QuantEdif = Number (edif.value)
+        var MQuadr = Number (metros2.value)
+
+        // Custo de instalação (único) SGC - R$200 por apto
+        var InstApto = QuantApto * 200
+        var InstCond = InstApto * QuantEdif
+
+        // Custo de manutenção (semestral) SGC - R$15 reais por apto
+        var TotalApto = QuantApto * QuantEdif
+        var Manut = TotalApto * 15
+
+        // Gasto médio com reformas após possíveis acidentes relacionados a vazamentos
+        // Considerando R$700 por m² e acidentes em 7% do condomínio
+        var GastoVazApto = MQuadr * 700
+        var PorcCond = TotalApto * 0.07
+        var ReformaCond = PorcCond * GastoVazApto
+
+        // Economia
+        CustoSGC = InstCond + Manut
+        Economia = ReformaCond - CustoSGC
+
+        mensagem.innerHTML = `<b style="color: darkred">
+            O gasto médio em reformas após possíveis acidentes relacionados a vazamento de gás seria de R$${ReformaCond}, considerando acidentes em 7% do condomínio
+            </b><br><br>`
+        mensagem.innerHTML += `<b style="color: darkblue"> 
+            O custo para o condomínio investindo na solução da SGC seria de: R$${CustoSGC} no 1º ano, estando incluso nesse valor a instalação única e manutenção semestral. <br>
+            Este valor passa para apenas R$${Manut} após o 2º ano, referente a manutenção semestral
+            </b><br><br>`
+        mensagem.innerHTML += `<b style="color: purple"> Sendo assim, a economia média com a SGC seria de: R$${Economia}, desconsiderando a manutenção a longo prazo`
     }
 
 </script>

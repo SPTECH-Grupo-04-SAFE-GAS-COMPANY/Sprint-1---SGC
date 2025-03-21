@@ -3,7 +3,7 @@ const int VALOR_MINIMO = 100;    // DECLARAÇÃO DA VARIÁVEL QUE GUARDA O VALOR
 const int VALOR_MAXIMO = 1000;  // DECLARAÇÃO DA VARIÁVEL QUE GUARDA O VALOR MÁXIMO
  int linhaFixa = 5;
 const float PORCENTAGEM_MIN = 5.0;
-const float PORCENTAGEM_MAX = 25.0;
+const float PORCENTAGEM_MAX = 20.0;
 float porcentagem = 0;
 
 void setup() {  // AQUI NESSE BLOCO ELE CONFIGURA O ARDUINO PARA 9600 BITS POR SEGUNDO
@@ -21,7 +21,7 @@ void loop() {
   Serial.print(porcentagem);
   Serial.print(" ");
   Serial.print("Máximo:");
-  Serial.println(20);
+  Serial.println(15);
   Serial.print(" ");
   
  porcentagem = ((float)(valorSensor - VALOR_MINIMO) / (VALOR_MAXIMO - VALOR_MINIMO)) * (PORCENTAGEM_MAX - PORCENTAGEM_MIN) + PORCENTAGEM_MIN;
@@ -35,3 +35,4 @@ void loop() {
 
   delay(2000);
 }
+
