@@ -30,7 +30,7 @@
     <br><br>
 
     Informe a altura do apartamento(m):
-    <input type="text" id="input_altura" style="background-color:rgb(217, 245, 231)" placeholder="Ex: 2.5">
+    <input type="text" id="input_altura" style="background-color:rgb(217, 245, 231)" placeholder="Ex: 2.7">
     <br><br>
 
     <h2 style="color: rgb(32, 140, 86)">Cálculo de Perda Financeira</h2>
@@ -43,8 +43,8 @@
         <option value="Sim">Sim</option>
         <option value="Nâo">Não</option>
     </select> <br>
-    
-   
+    Quantos andares foram afetados?:
+   <input type="text" id="input_and_afetados" style="background-color:rgb(217, 245, 231)" placeholder="Ex: 3"><br><br>
 Possui seguro contra incêndio?</b><br>
     <select style="background-color:rgb(217, 245, 231)" id="select_seguro">
         <option>Sim</option>
@@ -78,26 +78,34 @@ Possui seguro contra incêndio?</b><br>
         var vazamento = select_vazamento.value;
         var seguro = select_seguro.value;
         var valorImovel = Number(input_imovel.value);
+        var andaresAfetados = Number(input_and_afetados.value);
 
         //Em seguida damos continuidade realizando cálculos referentes ao modelo do negócio, a quantidade de aptos e o valor da perda estimada.
         var totalApto = andares * apto;
-        var valorPerdaEstimada = 0
+        var valorPerdaEstimada = 0;
+        var totalAfetados = andaresAfetados * apto;
+        var reconstrucaoMetro = 150000;
 
-        // a primeira condição verifica se o usuário inseriu um valor válido.
-        if (metros <= 0) {
-            alert("Valor inválido, por favor insira uma quantidade válida!")
-        }
-        /* Valor foi confirmado, então verificamos se o usuário possui seguro contra incêndio 
-        - 40.000 reais é a média da cobertura dos planos de seguro incendio (plano básico)
-        - https://pagbank.com.br/conta-digital/seguros-e-saude/seguro-residencia?utm_source=chatgpt.com
-        - https://www.bv.com.br/seguro/seguro-residencial (fontes)*/
+        // começamos verificando se possui ou não seguro
 
         if (seguro == 'Sim') {
-            valorPerdaEstimada = (valorImovel * totalApto) - (40000 * totalApto);
-            mensagem.innerHTML += `<p>Olá Condomínio <b>${nome}</b>,</p>
-                    <p>Considerando que seu prédio possui <b>${totalApto}</b> apartamentos e que cada unidade tem um valor estimado de <b style= "color: green">R$${valorImovel}</b>, o valor total dos imóveis em um prédio é de <b style= "color: green">R$${valorImovel * totalApto}</b>.</p>
-                    <p>Como vocês possuem seguro contra incêndio e a cobertura média dos planos básicos é de <b>R$40.000</b> por apartamento, a seguradora cobriria um total de <b>R$${40000 * totalApto}</b>.</p>
-                    <p>Dessa forma, estimamos que, em caso de incêndio, a perda financeira para o condomínio seria de aproximadamente <b style= "color: red">R$${valorPerdaEstimada}</b>.</p>`;
+            if (andares > 0) {
+            if (apto > 0) {
+                if(metros > 0){
+                    var totalImoveis = valorImovel * totalApto;
+                    var seguroTotalApto = 40000 * totalApto; 
+                    var valorAfetados = totalAfetados * valorImovel;
+                    valorPerdaEstimada = (valorImovel * totalApto) - seguroTotalApto;
+
+                    mensagem.innerHTML += `<p>Olá Condomínio <b>${nome}</b>,</p>
+                    <p>Considerando que seu prédio possui <b>${totalApto}</b> apartamentos e que cada unidade tem um valor estimado de <b style= "color: green">R$${valorImovel}</b>, o valor total dos imóveis em um prédio é de <b style= "color: green">R$${totalImoveis}</b>.</p>
+                    <p>Como vocês possuem seguro contra incêndio e a cobertura média dos planos básicos é de <b>R$40000</b> por apartamento, a seguradora cobriria um total de <b>R$${seguroTotalApto}</b>.</p>
+                    <p>Dessa forma, estimamos que, em caso de incêndio, a perda financeira para o condomínio seria de aproximadamente <b style= "color: red">R$${valorPerdaEstimada - valorAfetados}</b> levando em conta os <b style= "color: red"> ${andaresAfetados} andares </b> afetados.</p><br><br>`;
+                }
+            }
+        }else{
+            mensagem.innerHTML = `Insira valores válidos!`
+        }
         } else {
             valorPerdaEstimada = valorImovel * totalApto;
             mensagem.innerHTML += `
@@ -151,7 +159,7 @@ Possui seguro contra incêndio?</b><br>
             mensagem.innerHTML += categoria + `<p><b>Categoria de riscos em ppm :</b> <br>
                     Seguro: ppm < 1.000 <br>
                     Atenção: 1.000 ≤ ppm < 18.000 (Limite Inferior de Explosividade - LIE) <br>
-                    Risco de Asfixia: 18.000 ≤ ppm < 50.000 (concentração de GNP desloca oxigênio) <br>
+                    Risco de Asfixia: 18.000 ≤ ppm < 50.000 (concentração de GN desloca oxigênio) <br>
                     Risco de Explosão: 50.000 ≤ ppm < 95.000 (Limite Superior de Explosividade - LSE) <br><br>
                     Referências: https://lelambiental.com.br/artigos-tecnicos/deteccao-de-gases/ <br>
                     https://www.gov.br/anp/pt-br
