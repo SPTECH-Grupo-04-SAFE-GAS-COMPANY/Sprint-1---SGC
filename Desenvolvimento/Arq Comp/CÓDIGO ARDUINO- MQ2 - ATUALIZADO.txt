@@ -1,9 +1,9 @@
 const int PINO_SENSOR_MQ2 = A0;  // DECLARAÇÃO DA VARIÁVEL QUE ACESSA O PINO
 const int VALOR_MINIMO = 100;    // DECLARAÇÃO DA VARIÁVEL QUE GUARDA O VALOR MÍNIMO
+int linhaFixa = 0;
 const int VALOR_MAXIMO = 1000;  // DECLARAÇÃO DA VARIÁVEL QUE GUARDA O VALOR MÁXIMO
- int linhaFixa = 5;
 const float PORCENTAGEM_MIN = 5.0;
-const float PORCENTAGEM_MAX = 20.0;
+const float PORCENTAGEM_MAX = 18.0;
 float porcentagem = 0;
 
 void setup() {  // AQUI NESSE BLOCO ELE CONFIGURA O ARDUINO PARA 9600 BITS POR SEGUNDO
@@ -35,4 +35,3 @@ void loop() {
 
   delay(2000);
 }
-
