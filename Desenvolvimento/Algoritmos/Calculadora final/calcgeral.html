@@ -23,7 +23,7 @@
     <input type="number" id="input_andares" style="background-color:rgb(217, 245, 231)" placeholder="Ex: 10">
     <br><br>
 
-    <h2 style="color: rgb(32, 140, 86)">Cálculo de GN no ambiente</h2>
+    <h2 style="color: rgb(32, 140, 86)">Cálculo de Gás no ambiente</h2>
 
     Informe quantos metros cada apartamento possui(m²):
     <input type="number" id="input_metros" style="background-color:rgb(217, 245, 231)" placeholder="Ex: 55">
@@ -125,7 +125,7 @@ Possui seguro contra incêndio?</b><br>
             mensagem.innerHTML += categoria + `<p><b>Categoria de riscos em ppm :</b> <br>
                     Seguro: ppm < 1.000 <br>
                     Atenção: 1.000 ≤ ppm < 18.000 (Limite Inferior de Explosividade - LIE) <br>
-                    Risco de Asfixia: 18.000 ≤ ppm < 50.000 (concentração de GN desloca oxigênio) <br>
+                    Risco de Asfixia: 18.000 ≤ ppm < 50.000 (concentração de Gás desloca oxigênio) <br>
                     Risco de Explosão: 50.000 ≤ ppm < 95.000 (Limite Superior de Explosividade - LSE) <br><br>
                     Referências: https://lelambiental.com.br/artigos-tecnicos/deteccao-de-gases/<br>
                     <br>
@@ -134,32 +134,32 @@ Possui seguro contra incêndio?</b><br>
         } else {
             // Verificamos se o ppm está na categoria segura  
             if (ppm < 1.000) {
-                categoria += "<b style= 'color: green;'>Seguro:</b> A concentração de GN está em níveis seguros, sem risco imediato.<br>";
+                categoria += "<b style= 'color: green;'>Seguro:</b> A concentração de Gás está em níveis seguros, sem risco imediato.<br>";
             } else {
-                categoria += '<b style= "color: orange;">Atenção:</b>A concentração de GN está em níveis elevados, é necessário monitoramento constante.<br>';
+                categoria += '<b style= "color: orange;">Atenção:</b>A concentração de Gás está em níveis elevados, é necessário monitoramento constante.<br>';
             }
-            // Verificamos se há risco de asfixia ou não com base na quantidade de ppm de GN no ambiente
+            // Verificamos se há risco de asfixia ou não com base na quantidade de ppm de Gás no ambiente
             if (ppm >= 18.000) {
                 if (ppm < 50.000) {
-                    categoria += '<b style= "color: orange;">Risco de Asfixia:</b> A concentração de GN é alta o suficiente para deslocar oxigênio no ar, o ambiente precisa de ventilação.<br>'
+                    categoria += '<b style= "color: orange;">Risco de Asfixia:</b> A concentração de Gás é alta o suficiente para deslocar oxigênio no ar, o ambiente precisa de ventilação.<br>'
                 }
             } else {
-                categoria += '<b style= "color: green;">Sem risco de asfixia:</b> A concentração de GN está abaixo dos níveis críticos para asfixia.<br>';
+                categoria += '<b style= "color: green;">Sem risco de asfixia:</b> A concentração de Gás está abaixo dos níveis críticos para asfixia.<br>';
             }
-            // Verificamos se há risco de explosão levando em conta o máximo de ppm de GN que é de 9,5% no ambiente ou 95.000 ppm
+            // Verificamos se há risco de explosão levando em conta o máximo de ppm de Gás que é de 9,5% no ambiente ou 95.000 ppm
             if (ppm >= 18.000) {
                 if (ppm < 95.000) {
-                    categoria += '<b style= "color: red;">Risco de Explosão:</b> A concentração de GN está dentro da faixa explosiva. Evacuação imediata necessária!<br>';
+                    categoria += '<b style= "color: red;">Risco de Explosão:</b> A concentração de Gás está dentro da faixa explosiva. Evacuação imediata necessária!<br>';
                 }
             } else {
-                categoria += '<b style= "color: green;">Sem risco de explosão:</b> A concentração de GN está abaixo do limite inferior de explosividade (LIE).<br>';
+                categoria += '<b style= "color: green;">Sem risco de explosão:</b> A concentração de Gás está abaixo do limite inferior de explosividade (LIE).<br>';
             }
 
             // Mostramos então as categorias de riscos e a categoria atual com base no tamanho do apartamento, volume e volume de gás que vazou, bem como as referências desses cálculos.
             mensagem.innerHTML += categoria + `<p><b>Categoria de riscos em ppm :</b> <br>
                     Seguro: ppm < 1.000 <br>
                     Atenção: 1.000 ≤ ppm < 18.000 (Limite Inferior de Explosividade - LIE) <br>
-                    Risco de Asfixia: 18.000 ≤ ppm < 50.000 (concentração de GN desloca oxigênio) <br>
+                    Risco de Asfixia: 18.000 ≤ ppm < 50.000 (concentração de Gás desloca oxigênio) <br>
                     Risco de Explosão: 50.000 ≤ ppm < 95.000 (Limite Superior de Explosividade - LSE) <br><br>
                     Referências: https://lelambiental.com.br/artigos-tecnicos/deteccao-de-gases/ <br>
                     https://www.gov.br/anp/pt-br
